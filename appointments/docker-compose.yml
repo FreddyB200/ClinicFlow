@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # Application
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: medical-appointments-app
+    restart: always
+    ports:
+      - "9090:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - JDBC_DATABASE_URL=jdbc:postgresql://db:5432/medical_appointments
+      - JDBC_DATABASE_USERNAME=postgres
+      - JDBC_DATABASE_PASSWORD=postgres
+      - PROD_ADMIN_USERNAME=admin
+      - PROD_ADMIN_PASSWORD=secure_password
+    volumes:
+      - app-logs:/var/log/medical-appointments
+    networks:
+      - app-network
+
+  # Database
+  db:
+    image: postgres:13-alpine
+    container_name: medical-appointments-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=medical_appointments
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+  # pgAdmin (optional - for database management)
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: medical-appointments-pgadmin
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    depends_on:
+      - db
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - app-network
+
+volumes:
+  db-data:
+  app-logs:
+  pgadmin-data:
+
+networks:
+  app-network:
+    driver: bridge 
