@@ -16,10 +16,10 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       - JDBC_DATABASE_URL=jdbc:postgresql://db:5432/medical_appointments
-      - JDBC_DATABASE_USERNAME=postgres
-      - JDBC_DATABASE_PASSWORD=postgres
-      - PROD_ADMIN_USERNAME=admin
-      - PROD_ADMIN_PASSWORD=secure_password
+      - JDBC_DATABASE_USERNAME=${DB_USER:-postgres}
+      - JDBC_DATABASE_PASSWORD=${DB_PASSWORD:-changeMe123!}
+      - PROD_ADMIN_USERNAME=${ADMIN_USER:-admin}
+      - PROD_ADMIN_PASSWORD=${ADMIN_PASSWORD:-changeMe456!}
     volumes:
       - app-logs:/var/log/medical-appointments
     networks:
@@ -34,8 +34,8 @@ services:
       - "5432:5432"
     environment:
       - POSTGRES_DB=medical_appointments
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=${DB_USER:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-changeMe123!}
     volumes:
       - db-data:/var/lib/postgresql/data
     healthcheck:
@@ -54,8 +54,8 @@ services:
     ports:
       - "5050:80"
     environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@example.com
-      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL:-admin@example.com}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD:-changeMe789!}
     depends_on:
       - db
     volumes:
