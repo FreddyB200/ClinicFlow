@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en" 
-      th:replace="~{layout/main-layout :: html(title='Home', ~{::content}, ~{::scripts})}">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Home - Medical Appointments</title>
 </head>
 <body>
-    <div th:fragment="content">
+    <!-- Content Fragment -->
+    <div th:fragment="mainContent">
         <div class="jumbotron">
             <h1 class="display-4">Welcome to Medical Appointments System</h1>
             <p class="lead">Manage your medical practice efficiently with our appointment system.</p>
@@ -59,6 +60,7 @@
         </div>
     </div>
 
+    <!-- Scripts Fragment -->
     <th:block th:fragment="scripts">
         <!-- Additional scripts can be placed here -->
     </th:block>

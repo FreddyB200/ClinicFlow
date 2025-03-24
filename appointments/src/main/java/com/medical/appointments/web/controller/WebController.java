@@ -31,7 +31,10 @@ public class WebController {
      */
     @GetMapping
     public String home(Model model) {
-        return "home";
+        model.addAttribute("title", "Home");
+        model.addAttribute("mainContent", "home :: mainContent");
+        model.addAttribute("scripts", "home :: scripts");
+        return "layout/main-layout";
     }
 
     /**
@@ -43,7 +46,10 @@ public class WebController {
     @GetMapping("/doctors")
     public String doctors(Model model) {
         model.addAttribute("doctors", doctorService.getAllDoctors());
-        return "doctors/list";
+        model.addAttribute("title", "Doctors");
+        model.addAttribute("mainContent", "doctors/list :: mainContent");
+        model.addAttribute("scripts", "doctors/list :: scripts");
+        return "layout/main-layout";
     }
 
     /**
@@ -56,6 +62,9 @@ public class WebController {
     @GetMapping("/doctors/{id}")
     public String doctorDetails(@PathVariable Long id, Model model) {
         model.addAttribute("doctor", doctorService.getDoctorById(id));
-        return "doctors/details";
+        model.addAttribute("title", "Doctor Details");
+        model.addAttribute("mainContent", "doctors/details :: mainContent");
+        model.addAttribute("scripts", "doctors/details :: scripts");
+        return "layout/main-layout";
     }
 } 

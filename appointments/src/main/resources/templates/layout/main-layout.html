@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${pageTitle != null ? pageTitle + ' - ' : ''} + 'Medical Appointments'">Medical Appointments</title>
+    <title th:text="${title != null ? title + ' - ' : ''} + 'Medical Appointments'">Medical Appointments</title>
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
     
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    
+    <!-- Additional head content -->
+    <th:block th:replace="${headContent}">
+        <!-- Default head content -->
+    </th:block>
 </head>
 <body>
     <!-- Navigation -->
@@ -50,7 +55,7 @@
             <span th:text="${message}">Message</span>
         </div>
         
-        <div th:replace="~{::content}">
+        <div th:replace="${mainContent}">
             Page content goes here
         </div>
     </main>
@@ -72,6 +77,8 @@
     <script th:src="@{/js/main.js}"></script>
 
     <!-- Additional scripts -->
-    <th:block th:replace="~{::scripts}"/>
+    <th:block th:replace="${scripts}">
+        <!-- Default scripts -->
+    </th:block>
 </body>
 </html> 
