@@ -2,16 +2,55 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home - Medical Appointments</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title != null ? title + ' - ' : ''} + 'Medical Appointments'">Home - Medical Appointments</title>
     
-    <!-- Head Content Fragment -->
-    <th:block th:fragment="headContent">
-        <!-- Page specific head content -->
-    </th:block>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
 <body>
-    <!-- Content Fragment -->
-    <div th:fragment="mainContent">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/web}">Medical Appointments</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/web}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/web/doctors}">Doctors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="alert('Coming soon!')">Patients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="alert('Coming soon!')">Appointments</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/swagger-ui.html}" target="_blank">API Docs</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <div th:if="${message}" th:class="'alert alert-' + ${messageType ?: 'info'}" role="alert">
+            <span th:text="${message}">Message</span>
+        </div>
+        
+        <!-- Page Content -->
         <div class="jumbotron">
             <h1 class="display-4">Welcome to Medical Appointments System</h1>
             <p class="lead">Manage your medical practice efficiently with our appointment system.</p>
@@ -63,11 +102,22 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- Scripts Fragment -->
-    <th:block th:fragment="scripts">
-        <!-- Additional scripts can be placed here -->
-    </th:block>
+    <!-- Footer -->
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="container p-4">
+            <div class="text-center p-3">
+                &copy; 2025 Medical Appointments System
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
+    
+    <!-- Custom JavaScript -->
+    <script th:src="@{/js/main.js}"></script>
 </body>
 </html> 
