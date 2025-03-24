@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" 
+      th:replace="~{layout/main-layout :: html(title='Home', ~{::content}, ~{::scripts})}">
+<head>
+    <title>Home - Medical Appointments</title>
+</head>
+<body>
+    <div th:fragment="content">
+        <div class="jumbotron">
+            <h1 class="display-4">Welcome to Medical Appointments System</h1>
+            <p class="lead">Manage your medical practice efficiently with our appointment system.</p>
+            <hr class="my-4">
+            <p>Use the navigation above to access different sections of the application.</p>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Doctors</h5>
+                        <p class="card-text">Manage doctor profiles, specialties, and schedules.</p>
+                        <a th:href="@{/web/doctors}" class="btn btn-primary">View Doctors</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Patients</h5>
+                        <p class="card-text">Manage patient profiles and medical history.</p>
+                        <a href="#" class="btn btn-secondary" onclick="alert('Coming soon!')">Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Appointments</h5>
+                        <p class="card-text">Schedule and manage appointments.</p>
+                        <a href="#" class="btn btn-secondary" onclick="alert('Coming soon!')">Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        API Documentation
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">RESTful API</h5>
+                        <p class="card-text">This application provides a complete RESTful API for integration with other systems.</p>
+                        <a th:href="@{/api/swagger-ui.html}" target="_blank" class="btn btn-info">View API Documentation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:fragment="scripts">
+        <!-- Additional scripts can be placed here -->
+    </th:block>
+</body>
+</html> 
