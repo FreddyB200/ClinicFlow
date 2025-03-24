@@ -52,6 +52,9 @@ h2db/
 ### Docker ###
 .env
 docker-compose.override.yml
+data/
+/postgres-data/
+/logs/
 
 ### Logs ###
 logs/
@@ -67,3 +70,32 @@ Thumbs.db
 keystore.p12
 **/*.pem
 **/*.key
+
+### Cache ###
+/cache/
+/.ehcache/
+
+### Compiled Java Classes ###
+*.class
+
+### Package Files ###
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+### Node JS ###
+/node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+package-lock.json
+
+### Gradle ###
+.gradle
+/build/
+
+### Cursor Rules ###
+.cursorrules
