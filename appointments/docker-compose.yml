@@ -14,7 +14,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILE:-prod}
       - JDBC_DATABASE_URL=jdbc:postgresql://db:5432/medical_appointments
       - JDBC_DATABASE_USERNAME=${DB_USER:-postgres}
       - JDBC_DATABASE_PASSWORD=${DB_PASSWORD:-changeMe123!}
@@ -56,18 +56,18 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL:-admin@example.com}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD:-changeMe789!}
-    depends_on:
-      - db
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - db
     networks:
       - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
   db-data:
   app-logs:
   pgadmin-data:
-
-networks:
-  app-network:
-    driver: bridge 

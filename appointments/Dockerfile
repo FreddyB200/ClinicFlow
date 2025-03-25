@@ -19,14 +19,15 @@ RUN apk add --no-cache curl netcat-openbsd
 # Copy the JAR file from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Environment variables for Spring
+# Environment variables with defaults that can be overridden
 ENV SPRING_PROFILES_ACTIVE=prod
-
-# Optimized JVM settings
-ENV JAVA_OPTS="-Xms256m -Xmx512m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/var/log/medical-appointments/ -Djava.security.egd=file:/dev/./urandom"
+ENV JAVA_OPTS="-Xms256m -Xmx512m -XX:+UseG1GC -Djava.security.egd=file:/dev/./urandom"
 
 # Expose the application port
 EXPOSE 8080
+
+# Health check to ensure application is running
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 CMD curl -f http://localhost:8080/actuator/health || exit 1
 
 # Set an entrypoint to run the application
 ENTRYPOINT ["/bin/sh", "-c", "while ! nc -z db 5432; do echo 'Waiting for database to be available...'; sleep 1; done; echo 'Database is available, starting application...'; java $JAVA_OPTS -jar app.jar"]
