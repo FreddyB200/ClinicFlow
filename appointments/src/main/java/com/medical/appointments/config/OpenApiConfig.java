@@ -27,6 +27,12 @@ public class OpenApiConfig {
      */
     @Bean
     public OpenAPI openAPI() {
+        // Ensure contextPath starts with a slash if not empty
+        String path = contextPath;
+        if (path != null && !path.isEmpty() && !path.startsWith("/")) {
+            path = "/" + path;
+        }
+        
         return new OpenAPI()
                 .info(new Info()
                         .title("Medical Appointments API")
@@ -41,7 +47,7 @@ public class OpenApiConfig {
                                 .url("https://www.apache.org/licenses/LICENSE-2.0")))
                 .servers(List.of(
                         new Server()
-                                .url(contextPath)
+                                .url(path)
                                 .description("Current environment")
                 ));
     }
