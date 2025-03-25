@@ -1,5 +1,5 @@
 #!/bin/sh
-# wait-for-it.sh: Esperando a que un host:puerto esté disponible
+# wait-for-it.sh: Waiting for a host:port to be available
 
 set -e
 
@@ -9,9 +9,9 @@ shift 2
 cmd="$@"
 
 until nc -z "$host" "$port"; do
-  >&2 echo "Esperando a que $host:$port esté disponible..."
+  >&2 echo "Waiting for $host:$port to be available..."
   sleep 1
 done
 
->&2 echo "$host:$port está disponible, ejecutando el comando: $cmd"
-exec $cmd 
+>&2 echo "$host:$port is available, executing command: $cmd"
+exec $cmd
