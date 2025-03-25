@@ -19,10 +19,6 @@ RUN apk add --no-cache curl netcat-openbsd
 # Copy the JAR file from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Copy wait-for-it script
-COPY src/main/resources/wait-for-it.sh /wait-for-it.sh
-RUN chmod +x /wait-for-it.sh
-
 # Environment variables for Spring
 ENV SPRING_PROFILES_ACTIVE=prod
 
@@ -32,5 +28,5 @@ ENV JAVA_OPTS="-Xms256m -Xmx512m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -X
 # Expose the application port
 EXPOSE 8080
 
-# Set an entrypoint to run the application
-ENTRYPOINT ["/bin/sh", "-c", "/wait-for-it.sh db 5432 && java $JAVA_OPTS -jar app.jar"] 
+# Set an entrypoint to wait for database and run the application
+ENTRYPOINT ["/bin/sh", "-c", "while ! nc -z db 5432; do echo 'Waiting for database to be available...'; sleep 2; done; echo 'Database is available, starting application...'; java $JAVA_OPTS -jar app.jar"]
