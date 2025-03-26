@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.medical</groupId>
-	<artifactId>appointments</artifactId>
+	<artifactId>medical-appointments</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>medical-appointments</name>
 	<description>Medical Appointments Management System</description>
