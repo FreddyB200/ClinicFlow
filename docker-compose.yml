@@ -1,5 +1,6 @@
 version: '3.8'
 
+
 services:
   # Application
   app:
@@ -9,7 +10,7 @@ services:
     container_name: medical-appointments-app
     restart: always
     ports:
-      - "9090:8080"
+      - "9091:8080"
     depends_on:
       db:
         condition: service_healthy
@@ -27,11 +28,11 @@ services:
 
   # Database
   db:
-    image: postgres:13-alpine
+    image: postgres:16-alpine
     container_name: medical-appointments-db
     restart: always
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       - POSTGRES_DB=medical_appointments
       - POSTGRES_USER=${DB_USER:-postgres}
