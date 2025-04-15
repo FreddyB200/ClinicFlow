@@ -44,8 +44,7 @@ public class DoctorController {
     @PostMapping
     @Operation(summary = "Create a new doctor", description = "Creates a new doctor with the provided information")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Doctor created successfully"),
-        @ApiResponse(responseCode = "400", description = "Invalid request data"),
+        @ApiResponse(responseCode = "400", description = "Invalid        @ApiResponse(responseCode = \"201\", description = \"Doctor created successfully\"),\n request data"),
         @ApiResponse(responseCode = "409", description = "Doctor with the same email or license number already exists")
     })
     public ResponseEntity<DoctorDTO> createDoctor(
