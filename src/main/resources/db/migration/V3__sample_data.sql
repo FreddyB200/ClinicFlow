@@ -1,5 +1,74 @@
 -- V3__sample_data.sql
--- Sample data for Medical Appointments System
+-- Sample data and table creation for Medical Appointments System
+
+-- Create roles table
+CREATE TABLE IF NOT EXISTS role (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) UNIQUE NOT NULL
+);
+
+-- Create specialties table
+CREATE TABLE IF NOT EXISTS specialty (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL
+);
+
+-- Create users table
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    enabled BOOLEAN DEFAULT TRUE
+);
+
+-- Create user_roles table
+CREATE TABLE IF NOT EXISTS user_roles (
+    user_id INTEGER NOT NULL REFERENCES users(id),
+    role_id INTEGER NOT NULL REFERENCES role(id),
+    PRIMARY KEY (user_id, role_id)
+);
+
+-- Create patient table
+CREATE TABLE IF NOT EXISTS patient (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone VARCHAR(20),
+    active BOOLEAN DEFAULT TRUE
+);
+
+-- Create doctors table
+CREATE TABLE IF NOT EXISTS doctors (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone VARCHAR(20),
+    specialty VARCHAR(50) NOT NULL,
+    license_number VARCHAR(50) UNIQUE NOT NULL,
+    date_of_birth DATE,
+    active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create appointment table
+CREATE TABLE IF NOT EXISTS appointment (
+    id SERIAL PRIMARY KEY,
+    doctor_id INTEGER NOT NULL REFERENCES doctors(id),
+    patient_id INTEGER NOT NULL REFERENCES patient(id),
+    appointment_date_time TIMESTAMP NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    notes TEXT
+);
+
+-- Indexes for doctors
+CREATE INDEX IF NOT EXISTS idx_doctor_name ON doctors(first_name, last_name);
+CREATE INDEX IF NOT EXISTS idx_doctor_specialty ON doctors(specialty);
+CREATE INDEX IF NOT EXISTS idx_doctor_email ON doctors(email);
+
 
 -- Insert roles
 INSERT INTO role (id, name) VALUES (1, 'ADMIN'), (2, 'DOCTOR'), (3, 'PATIENT') ON CONFLICT DO NOTHING;
@@ -21,12 +90,6 @@ INSERT INTO user_roles (user_id, role_id) VALUES (1, 1), (2, 2), (3, 3) ON CONFL
 INSERT INTO patient (id, first_name, last_name, email, phone, active) VALUES
   (1, 'John', 'Doe', 'john@demo.com', '555-1234', true),
   (2, 'Jane', 'Smith', 'jane@demo.com', '555-5678', true)
-ON CONFLICT DO NOTHING;
-
--- Insert doctors
-INSERT INTO doctor (id, first_name, last_name, email, specialty_id, active) VALUES
-  (1, 'Anna', 'Smith', 'drsmith@demo.com', 1, true),
-  (2, 'Peter', 'Brown', 'drbrown@demo.com', 2, true)
 ON CONFLICT DO NOTHING;
 
 -- Insert appointments

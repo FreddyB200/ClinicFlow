@@ -29,10 +29,10 @@
                         <a class="nav-link active" th:href="@{/web/doctors}">Doctors</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="alert('Coming soon!')">Patients</a>
+                        <a class="nav-link" th:href="@{/patients}">Patients</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="alert('Coming soon!')">Appointments</a>
+                        <a class="nav-link" th:href="@{/appointments}">Appointments</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -54,7 +54,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>Doctors</h1>
             <div>
-                <button type="button" class="btn btn-success" disabled title="Coming soon!">Add Doctor</button>
+                <a class="btn btn-success" th:href="@{/doctors/new}">Add Doctor</a>
             </div>
         </div>
 
