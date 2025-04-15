@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Specialties List</title>
+</head>
+<body>
+<h1>Specialties</h1>
+<a th:href="@{/specialties/new}">Add Specialty</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="specialty : ${specialties}">
+        <td th:text="${specialty.id}"></td>
+        <td th:text="${specialty.name}"></td>
+        <td>
+            <a th:href="@{'/specialties/edit/' + ${specialty.id}}">Edit</a> |
+            <a th:href="@{'/specialties/delete/' + ${specialty.id}}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

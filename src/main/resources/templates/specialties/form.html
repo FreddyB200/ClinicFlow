@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Specialty Form</title>
+</head>
+<body>
+<h1 th:text="${specialty.id == null} ? 'Add Specialty' : 'Edit Specialty'"></h1>
+<form th:action="${specialty.id == null} ? @{/specialties} : @{'/specialties/update/' + ${specialty.id}}" th:object="${specialty}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <label>Name: <input type="text" th:field="*{name}" required/></label><br/>
+    <button type="submit">Save</button>
+</form>
+<a th:href="@{/specialties}">Back</a>
+</body>
+</html>

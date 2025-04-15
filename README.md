@@ -1,70 +1,62 @@
 # Medical Appointments Management System
 
-A complete system for managing medical appointments, doctors, and patients.
+This project is a robust platform for managing medical appointments, doctors, patients, users, and specialties. It is designed with a professional architecture using Spring Boot, PostgreSQL, and Docker. The system is structured to be easily extendable and ready for integration with modern frontends and advanced security.
 
-## Features
+## Main Features
+- Doctor, Patient, Appointment, Specialty, and User management
+- Role-based authentication and authorization (ready for advanced security)
+- RESTful API documented with Swagger/OpenAPI
+- MVP web interface using Thymeleaf for rapid prototyping
+- PostgreSQL persistence
+- Docker and Docker Compose for easy deployment
+- Clean, maintainable codebase in English
 
-- Doctor management
-- Medical appointment scheduling
-- Patient registration
-- Authentication and authorization system
-- Modern and responsive web interface
+## Architecture
+- **Backend:** Spring Boot 3.4.4 (Java 17)
+- **Database:** PostgreSQL
+- **Frontend MVP:** Thymeleaf (for demo/testing, ready for migration to SPA)
+- **API Docs:** Swagger UI (`/swagger-ui.html`)
+- **Containerization:** Docker & Docker Compose
 
 ## Requirements
-
-- Java 17 or higher
+- Java 17+
 - Maven 3.6+
 - PostgreSQL 13+
-- Docker and Docker Compose (optional, for containerized deployment)
+- Docker & Docker Compose (optional)
 
-## Development Setup
+## Getting Started
 
-### Prerequisites
-
-Make sure you have the following installed:
-1. JDK 17
-2. Maven
-3. PostgreSQL
-4. Git
-
-### Clone the Repository
-
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/yourusername/medical-appointments-system.git
 cd medical-appointments-system
 ```
 
-### Database Configuration
+### 2. Local Development (without Docker)
+- Create a PostgreSQL database:
+  ```sql
+  CREATE DATABASE medical_appointments;
+  ```
+- Configure your credentials in `src/main/resources/application-dev.properties` or via environment variables.
+- Run the application:
+  ```bash
+  mvn spring-boot:run
+  ```
+- Access the MVP web interface at: http://localhost:8080/api (context path `/api`)
+- Access Swagger UI at: http://localhost:8080/api/swagger-ui.html
 
-1. Create a PostgreSQL database:
-```sql
-CREATE DATABASE medical_appointments;
-```
-
-2. Configure the connection details in `application-dev.properties` or use environment variables.
-
-### Run the Application
-
-```bash
-mvn spring-boot:run
-```
-
-The application will be available at: http://localhost:8080/api
-
-## Docker Deployment
-
-The project includes Docker configuration for easy deployment:
-
-```bash
-# Copy and configure environment variables
-cp .env.example .env
-# Edit the .env file with your desired configuration
-
-# Start the containers
-docker-compose up -d
-```
-
-The application will be available at: http://localhost:9090/api
+### 3. Docker Deployment
+- Copy and configure environment variables:
+  ```bash
+  cp .env.example .env
+  # Edit the .env file with your configuration
+  ```
+- Build and run with Docker Compose:
+  ```bash
+  docker-compose up --build
+  ```
+- The app will be available at: http://localhost:9091/api
+- Swagger UI: http://localhost:9091/api/swagger-ui.html
 The database administration panel (pgAdmin) at: http://localhost:5050
 
 ## API Documentation
