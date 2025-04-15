@@ -45,4 +45,37 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-}); 
+
+    // Enable form validation (Bootstrap 5)
+    var forms = document.querySelectorAll('.needs-validation');
+    Array.prototype.slice.call(forms).forEach(function(form) {
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+
+    // Modal focus (if any modals are used)
+    var modals = document.querySelectorAll('.modal');
+    modals.forEach(function(modal) {
+        modal.addEventListener('shown.bs.modal', function() {
+            var autofocus = modal.querySelector('[autofocus]');
+            if (autofocus) autofocus.focus();
+        });
+    });
+
+    // Smooth scroll for anchor links
+    var anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            var target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+});
