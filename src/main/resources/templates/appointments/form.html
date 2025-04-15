@@ -1,19 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>Appointment Form</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
-<body>
-<h1 th:text="${appointment.id == null} ? 'Add Appointment' : 'Edit Appointment'"></h1>
-<form th:action="${appointment.id == null} ? @{/appointments} : @{'/appointments/update/' + ${appointment.id}}" th:object="${appointment}" method="post">
-    <input type="hidden" th:field="*{id}"/>
-    <label>Doctor: <input type="text" th:field="*{doctorName}" required/></label><br/>
-    <label>Patient: <input type="text" th:field="*{patientName}" required/></label><br/>
-    <label>Date/Time: <input type="datetime-local" th:field="*{appointmentDateTime}" required/></label><br/>
-    <label>Status: <input type="text" th:field="*{status}"/></label><br/>
-    <label>Notes: <input type="text" th:field="*{notes}"/></label><br/>
-    <button type="submit">Save</button>
-</form>
-<a th:href="@{/appointments}">Back</a>
+<body layout:decorate="~{layout/main-layout}">
+<section layout:fragment="content">
+    <h1 th:text="${appointment.id == null} ? 'Add Appointment' : 'Edit Appointment'"></h1>
+    <form class="needs-validation" novalidate th:action="${appointment.id == null} ? @{/appointments} : @{'/appointments/update/' + ${appointment.id}}" th:object="${appointment}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <div class="mb-3">
+            <label class="form-label">Doctor</label>
+            <input type="text" class="form-control" th:field="*{doctorName}" required/>
+            <div class="invalid-feedback">Doctor is required.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Patient</label>
+            <input type="text" class="form-control" th:field="*{patientName}" required/>
+            <div class="invalid-feedback">Patient is required.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Date/Time</label>
+            <input type="datetime-local" class="form-control" th:field="*{appointmentDateTime}" required/>
+            <div class="invalid-feedback">Date and time are required.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Status</label>
+            <input type="text" class="form-control" th:field="*{status}"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Notes</label>
+            <input type="text" class="form-control" th:field="*{notes}"/>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+        <a class="btn btn-link" th:href="@{/appointments}">Back</a>
+    </form>
+</section>
+<script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
 </body>
 </html>

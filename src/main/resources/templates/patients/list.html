@@ -1,41 +1,48 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>Patients List</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
-<body>
-<h1>Patients</h1>
-<a th:href="@{/patients/new}">Add Patient</a>
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Date of Birth</th>
-        <th>Gender</th>
-        <th>Active</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="patient : ${patients}">
-        <td th:text="${patient.id}"></td>
-        <td th:text="${patient.firstName}"></td>
-        <td th:text="${patient.lastName}"></td>
-        <td th:text="${patient.email}"></td>
-        <td th:text="${patient.phone}"></td>
-        <td th:text="${patient.dateOfBirth}"></td>
-        <td th:text="${patient.gender}"></td>
-        <td th:text="${patient.active}"></td>
-        <td>
-            <a th:href="@{'/patients/edit/' + ${patient.id}}">Edit</a> |
-            <a th:href="@{'/patients/delete/' + ${patient.id}}">Delete</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<body layout:decorate="~{layout/main-layout}">
+<section layout:fragment="content">
+    <h1>Patients</h1>
+    <a class="btn btn-primary mb-2" th:href="@{/patients/new}">Add Patient</a>
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Active</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="patient : ${patients}">
+            <td th:text="${patient.id}"></td>
+            <td th:text="${patient.firstName}"></td>
+            <td th:text="${patient.lastName}"></td>
+            <td th:text="${patient.email}"></td>
+            <td th:text="${patient.phone}"></td>
+            <td th:text="${patient.dateOfBirth}"></td>
+            <td th:text="${patient.gender}"></td>
+            <td th:text="${patient.active}"></td>
+            <td>
+                <a th:href="@{'/patients/edit/' + ${patient.id}}" class="btn btn-sm btn-secondary">Edit</a>
+                <a th:href="@{'/patients/delete/' + ${patient.id}}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-link" th:href="@{/web}">Back to Home</a>
+</section>
+<script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
 </body>
 </html>
