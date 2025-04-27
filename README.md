@@ -1,6 +1,6 @@
 # Medical Appointments Management System
 
-This project is a robust platform for managing medical appointments, doctors, patients, users, and specialties. It is designed with a professional architecture using Spring Boot, PostgreSQL, and Docker. The system is structured to be easily extendable and ready for integration with modern frontends and advanced security.
+This project is a platform for managing medical appointments, doctors, patients, users, and specialties. It is designed with a professional architecture using Spring Boot, PostgreSQL, and Docker. The system is structured to be easily extendable and ready for integration with modern frontends and advanced security.
 
 ## Main Features
 - Doctor, Patient, Appointment, Specialty, and User management
