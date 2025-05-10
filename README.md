@@ -1,4 +1,4 @@
-# Medical Appointments Management System
+# ClinicFlow
 
 This project is a platform for managing medical appointments, doctors, patients, users, and specialties. It is designed with a professional architecture using Spring Boot, PostgreSQL, and Docker. The system is structured to be easily extendable and ready for integration with modern frontends and advanced security.
 
