@@ -28,14 +28,14 @@ This project is a platform for managing medical appointments, doctors, patients,
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/medical-appointments-system.git
-cd medical-appointments-system
+git clone https://github.com/yourusername/ClinicFlow.git
+cd ClinicFlow
 ```
 
 ### 2. Local Development (without Docker)
 - Create a PostgreSQL database:
   ```sql
-  CREATE DATABASE medical_appointments;
+  CREATE DATABASE clinic_flow;
   ```
 - Configure your credentials in `src/main/resources/application-dev.properties` or via environment variables.
 - Run the application:
